@@ -1,0 +1,13 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" x:Class="ChartApplicationWPF.MainWindow"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+
+        <chartingToolkit:Chart  Name ="Chart" Margin="10,10,10,10" Title="Test Chart" HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" Height="309" Width="517" RenderTransformOrigin="0.096,0.718">
+        </chartingToolkit:Chart>
+
+    </Grid>
+</Window>
