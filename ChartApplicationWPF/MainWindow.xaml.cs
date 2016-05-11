@@ -46,6 +46,7 @@ namespace ChartApplicationWPF
             this.Dispatcher.Invoke((Action)(() =>
             {
                 points.AddPoint(x, y);
+                if(x == 200)    points.MaxNumberPoints = 10;
             }));        
         }
 
