@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
@@ -22,23 +23,35 @@ namespace ChartApplicationWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        int x = 0;
+        int y = 0;
+        ObservableCollection<KeyValuePair<double, double>> values;
         public MainWindow()
         {
             InitializeComponent();
             var line = new LineSeries();
-            ObservableCollection<KeyValuePair<double, double>> values = new ObservableCollection<KeyValuePair<double, double>>();
-            values.Add(new KeyValuePair<double, double>(10, 10));
-            values.Add(new KeyValuePair<double, double>(20, 40));
-            values.Add(new KeyValuePair<double, double>(30, 90));
-            values.Add(new KeyValuePair<double, double>(40, 160));
-            values.Add(new KeyValuePair<double, double>(50, 250));
-
+            values = new ObservableCollection<KeyValuePair<double, double>>();
+            
             line.SetBinding(LineSeries.ItemsSourceProperty, new Binding());
             line.DataContext = values;
             line.DependentValueBinding = new Binding("Value");
             line.IndependentValueBinding = new Binding("Key");
             line.DataContext = values;
             Chart.Series.Add(line);
+            Timer timer = new Timer(1000);
+            timer.Enabled = true;
+            timer.Elapsed += this.OnTimer; 
         }
+
+        private void OnTimer(object asdsa, EventArgs ard){
+            x += 10;
+            y += 10;
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                values.Add(new KeyValuePair<double, double>(x, y));
+            }));        
+        }
+
+
     }
 }
