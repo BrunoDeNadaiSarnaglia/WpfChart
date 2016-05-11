@@ -23,20 +23,17 @@ namespace ChartApplicationWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        int x = 0;
-        int y = 0;
-        ObservableCollection<KeyValuePair<double, double>> values;
+        double x = 0;
+        double y = 0;
+        Points points = new Points();
         public MainWindow()
         {
             InitializeComponent();
             var line = new LineSeries();
-            values = new ObservableCollection<KeyValuePair<double, double>>();
-            
             line.SetBinding(LineSeries.ItemsSourceProperty, new Binding());
-            line.DataContext = values;
             line.DependentValueBinding = new Binding("Value");
             line.IndependentValueBinding = new Binding("Key");
-            line.DataContext = values;
+            line.DataContext = points;
             Chart.Series.Add(line);
             Timer timer = new Timer(1000);
             timer.Enabled = true;
@@ -48,7 +45,7 @@ namespace ChartApplicationWPF
             y += 10;
             this.Dispatcher.Invoke((Action)(() =>
             {
-                values.Add(new KeyValuePair<double, double>(x, y));
+                points.AddPoint(x, y);
             }));        
         }
 
